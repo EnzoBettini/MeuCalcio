@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuCálcio - Receitas Ricas em Cálcio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #5E7B91;
+            --secondary-color-bg: #F0F4F8;
+            --accent-color-positive: #4CAF50;
+            --accent-color-warning: #FF9800;
+            --accent-color-negative: #F44336;
+            --highlight-color: #FF7F50;
+            --text-color-dark: #333A40;
+            --text-color-light: #FFFFFF;
+            --border-color: #DDE2E6;
+            --navbar-bg: #37474F;
+            --navbar-link-color: #ECEFF1;
+            --navbar-link-hover-bg: #546E7A;
+            --navbar-link-active-bg: var(--primary-color);
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --font-primary: 'Lato', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            padding-top: 70px;
+            background-color: #F4F7F6;
+            color: var(--text-color-dark);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* --- Navbar Styles --- */
+        .navbar {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            height: 70px;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .navbar-brand {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            font-size: 1.9rem;
+            color: var(--text-color-light);
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--highlight-color);
+        }
+
+        .navbar-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100%;
+        }
+
+        .nav-item {
+            margin-left: 8px;
+        }
+
+        .nav-item:first-child {
+            margin-left: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px;
+            color: var(--navbar-link-color);
+            text-decoration: none;
+            font-family: var(--font-secondary);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: background-color 0.25s ease, color 0.25s ease, border-bottom-color 0.25s ease;
+            position: relative;
+            border-bottom: 4px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .nav-link:hover {
+            background-color: var(--navbar-link-hover-bg);
+            color: var(--text-color-light);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-link.active {
+            background-color: var(--navbar-link-active-bg);
+            color: var(--text-color-light);
+            font-weight: 700;
+            border-bottom-color: var(--highlight-color);
+        }
+
+        /* --- Conteúdo Principal da Página de Receitas --- */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 30px 35px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .page-header h1 i {
+            color: var(--highlight-color);
+        }
+
+        .page-header p {
+            font-size: 1.15rem;
+            color: #546E7A;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Filtros (Seletores) */
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            /* Para melhor controle dos botões */
+            flex-wrap: wrap;
+            /* Permite quebra de linha em telas menores */
+            justify-content: center;
+            /* Centraliza os botões */
+            gap: 10px;
+            /* Espaço entre os botões */
+        }
+
+        .filter-btn {
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+            padding: 10px 20px;
+            /* margin: 5px; Removido, usando gap */
+            border-radius: 25px;
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-btn:hover {
+            background-color: var(--secondary-color-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: var(--text-color-light);
+            border-color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Galeria de Receitas */
+        .recipe-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .recipe-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 6px 20px var(--card-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .recipe-card img.recipe-image-thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--highlight-color);
+        }
+
+        .recipe-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recipe-card-content h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            /* Para nomes longos */
+        }
+
+        .recipe-card-content p.recipe-description {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            line-height: 1.5;
+        }
+
+        .recipe-tags {
+            margin-bottom: 15px;
+            min-height: 25px;
+            /* Para evitar pulo de layout se não houver tags */
+        }
+
+        .recipe-tags .tag {
+            display: inline-block;
+            background-color: var(--secondary-color-bg);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .btn-view-recipe {
+            background-color: var(--highlight-color);
+            color: var(--text-color-light);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-secondary);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-top: auto;
+        }
+
+        .btn-view-recipe:hover {
+            background-color: #E65100;
+        }
+
+        .btn-view-recipe i {
+            margin-right: 8px;
+        }
+
+        /* Modal de Receita */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border: none;
+            width: 90%;
+            max-width: 750px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .modal-recipe-details {
+            padding: 25px 30px 30px 30px;
+            max-height: calc(90vh - 280px - 60px);
+            /* Altura da imagem + padding do modal */
+            overflow-y: auto;
+            /* Scroll para conteúdo longo */
+        }
+
+        .modal-content h2 {
+            font-family: var(--font-secondary);
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+        }
+
+        .modal-content h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--text-color-dark);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal-content ul,
+        .modal-content ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .modal-content ul li,
+        .modal-content ol li {
+            margin-bottom: 8px;
+        }
+
+        .close-btn {
+            color: var(--text-color-light);
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            line-height: 1;
+            z-index: 10;
+            /* Para ficar acima da imagem do header */
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .page-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .navbar-container {
+                padding: 0 15px;
+            }
+
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                height: 60px;
+            }
+
+            .navbar-container {
+                padding: 0 10px;
+            }
+
+            .navbar-brand {
+                font-size: 1.6rem;
+            }
+
+            .nav-link {
+                padding: 0 12px;
+                font-size: 0.95rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .filter-buttons {
+                margin-bottom: 30px;
+            }
+
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .recipe-gallery {
+                gap: 20px;
+            }
+
+            .modal-content {
+                margin: 5vh auto;
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            /* Ajuste para modal ocupar mais da altura */
+            .modal-header-image {
+                height: 220px;
+            }
+
+            .modal-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .modal-recipe-details {
+                padding: 20px;
+                max-height: calc(85vh - 220px - 40px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+                padding-top: 55px;
+            }
+
+            .navbar {
+                height: 55px;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-link {
+                padding: 0 8px;
+                font-size: 0.85rem;
+            }
+
+            .nav-item {
+                margin-left: 3px;
+            }
+
+            .page-header h1 {
+                font-size: 1.9rem;
+            }
+
+            .recipe-gallery {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .recipe-card img.recipe-image-thumbnail {
+                height: 220px;
+            }
+
+            .modal-header-image {
+                height: 180px;
+            }
+
+            .modal-content h2 {
+                font-size: 1.6rem;
+            }
+
+            .modal-recipe-details {
+                max-height: calc(85vh - 180px - 40px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-bone"></i> MeuCálcio</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="index.html" id="nav-calculadora" class="nav-link">Calculadora</a></li>
+                <li class="nav-item"><a href="receitas.html" id="nav-receitas" class="nav-link active">Receitas</a></li>
+                <li class="nav-item"><a href="sobre.html" id="nav-dicas" class="nav-link">Dicas & Extras</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-utensils"></i> Receitas Ricas em Cálcio</h1>
+            <p>Inspire-se com pratos deliciosos e nutritivos para aumentar sua ingestão de cálcio de forma saborosa!</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todas</button>
+            <button class="filter-btn" data-filter="vegano">Vegano</button>
+            <button class="filter-btn" data-filter="rapido">Rápido</button>
+            <button class="filter-btn" data-filter="lanche">Lanche</button>
+            <button class="filter-btn" data-filter="refeicao">Refeição Principal</button>
+            <button class="filter-btn" data-filter="sem-gluten">Sem Glúten</button>
+            <button class="filter-btn" data-filter="sem-lactose">Sem Lactose</button>
+        </div>
+
+        <div class="recipe-gallery" id="recipeGallery">
+        </div>
+    </div>
+
+    <div id="recipeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeRecipeModalBtn">&times;</span>
+            <img src="" alt="Imagem da Receita" class="modal-header-image" id="modalRecipeImage">
+            <div class="modal-recipe-details">
+                <h2 id="modalRecipeName">Nome da Receita</h2>
+                <h4><i class="fas fa-apple-alt"></i> Ingredientes:</h4>
+                <ul id="modalRecipeIngredients"></ul>
+                <h4><i class="fas fa-book-reader"></i> Modo de Preparo:</h4>
+                <ol id="modalRecipeInstructions"></ol>
+                <p style="font-size:0.85em; text-align: right; color: #777; margin-top: 20px;"><em>Fonte: <span
+                            id="modalRecipeSource">Fonte da receita</span></em></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2025 MeuCálcio. Todos os direitos reservados (simulação).</p>
+    </footer>
+
+    <script>
+        const recipesData = [
+            {
+                id: 1,
+                name: "Smoothie Verde Energizante com Couve e Chia",
+                image: "https://images.pexels.com/photos/103566/pexels-photo-103566.jpeg?auto=compress&cs=tinysrgb&w=600",
+                description: "Comece o dia com energia e cálcio com este smoothie delicioso e fácil.",
+                ingredients: ["1 xícara de couve fresca picada", "1/2 xícara de bebida vegetal enriquecida com cálcio", "1 banana congelada", "1/2 maçã verde", "1 col. sopa de sementes de chia", "1 col. sopa de pasta de amêndoa (opcional)", "Suco de 1/2 limão", "Água ou gelo a gosto"],
+                instructions: ["Lave bem a couve e a maçã.", "Coloque todos os ingredientes no liquidificador.", "Bata até obter uma mistura homogênea. Adicione água ou gelo se necessário.", "Sirva imediatamente."],
+                tags: ["vegano", "café da manhã", "lanche", "rapido", "sem-gluten", "sem-lactose"],
+                source: "Adaptado de receitas populares"
+            },
+            {
+                id: 2,
+                name: "Salmão Assado com Crosta de Gergelim e Brócolis",
+                image: "https://images.pexels.com/photos/7625121/pexels-photo-7625121.jpeg?auto=compress&cs=tinysrgb&w=600",
+                description: "Um prato principal elegante, saboroso e rico em cálcio (gergelim e salmão) e ômega-3.",
+                ingredients: ["2 filés de salmão (180g cada)", "2 col. sopa de sementes de gergelim", "1 col. sopa de azeite", "1 col. sopa de shoyu", "1 dente de alho amassado", "1/2 col. chá de gengibre ralado", "Sal e pimenta", "Brócolis no vapor para acompanhar"],
+                instructions: ["Preaqueça o forno a 200°C.", "Misture azeite, shoyu, alho e gengibre.", "Tempere o salmão, pincele a mistura e cubra com gergelim.", "Asse por 12-15 min.", "Sirva com brócolis."],
+                tags: ["refeicao", "peixe", "sem-gluten"],
+                source: "Inspirado em pratos clássicos"
+            },
+            {
+                id: 3,
+                name: "Tigela de Iogurte Grego com Amêndoas e Frutas Vermelhas", // Imagem corrigida
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fFlvZ3VydCUyMGJvd2wlMjBiZXJyaWVzfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+                description: "Rápida, deliciosa e cheia de cálcio para café da manhã, lanche ou sobremesa.",
+                ingredients: ["1 pote (200g) de iogurte grego natural", "1/2 xícara de frutas vermelhas (morangos, mirtilos)", "1/4 xícara de amêndoas laminadas", "1 col. chá de mel (opcional)", "Pitada de canela (opcional)"],
+                instructions: ["Coloque o iogurte na tigela.", "Adicione as frutas vermelhas e amêndoas.", "Regue com mel e polvilhe canela, se desejar.", "Sirva."],
+                tags: ["café da manhã", "lanche", "sobremesa", "rapido", "sem-gluten"],
+                source: "Combinação clássica"
+            },
+            {
+                id: 4,
+                name: "Couve Refogada com Alho e Gergelim",
+                image: "https://images.pexels.com/photos/5638531/pexels-photo-5638531.jpeg?auto=compress&cs=tinysrgb&w=600", // Imagem representativa
+                description: "Acompanhamento simples, nutritivo e uma excelente forma de consumir cálcio das folhas verdes.",
+                ingredients: ["1 maço de couve manteiga fatiada finamente", "2 dentes de alho picados", "1 col. sopa de azeite de oliva", "1 col. sopa de sementes de gergelim torradas", "Sal e pimenta do reino a gosto"],
+                instructions: ["Aqueça o azeite em uma frigideira grande.", "Adicione o alho e refogue rapidamente até perfumar.", "Acrescente a couve fatiada e refogue, mexendo ocasionalmente, até murchar e ficar macia (cerca de 5-7 minutos).", "Tempere com sal e pimenta.", "Finalize com as sementes de gergelim torradas por cima antes de servir."],
+                tags: ["vegano", "acompanhamento", "refeicao", "rapido", "sem-gluten", "sem-lactose"],
+                source: "Receita popular brasileira"
+            },
+            {
+                id: 5,
+                name: "Patê de Sardinha Caseiro",
+                image: "https://images.pexels.com/photos/1769305/pexels-photo-1769305.jpeg?auto=compress&cs=tinysrgb&w=600", // Imagem representativa de sardinha/patê
+                description: "Fonte prática de cálcio (das espinhas da sardinha) e ômega-3, ótimo para lanches.",
+                ingredients: ["2 latas de sardinha em óleo ou ao natural (com espinhas, se possível)", "1/2 xícara de maionese ou iogurte natural", "1/4 xícara de cebola roxa picada finamente", "2 col. sopa de salsinha ou coentro picado", "Suco de 1/2 limão", "Sal e pimenta do reino a gosto", "Torradas ou pão integral para servir"],
+                instructions: ["Escorra bem as sardinhas.", "Em uma tigela, amasse as sardinhas com um garfo (incluindo as espinhas macias, que são ricas em cálcio).", "Adicione a maionese (ou iogurte), cebola roxa, salsinha/coentro e suco de limão.", "Misture bem até formar uma pasta homogênea.", "Tempere com sal e pimenta a gosto.", "Sirva com torradas, pão integral ou como recheio de sanduíches."],
+                tags: ["lanche", "peixe", "rapido", "sem-gluten" /* se servido com pão SG */],
+                source: "Receita caseira popular"
+            },
+            {
+                id: 6,
+                name: "Tofu Mexido Cremoso com Cúrcuma e Espinafre",
+                image: "https://images.unsplash.com/photo-1606502973842-a8853440ba30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2NyYW1ibGVkJTIwdG9mdXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                description: "Alternativa vegana deliciosa aos ovos mexidos, rica em proteínas e cálcio (usando tofu fortificado).",
+                ingredients: ["300g de tofu firme ou extra firme, amassado (preferencialmente fortificado com cálcio)", "1 col. sopa de azeite", "1/2 cebola pequena picada", "1 dente de alho picado", "1/2 col. chá de cúrcuma em pó", "1/4 col. chá de cominho em pó (opcional)", "2 col. sopa de levedura nutricional (para sabor de queijo e vitaminas B)", "2 xícaras de espinafre fresco", "Sal e pimenta preta a gosto", "Um fio de bebida vegetal (opcional, para cremosidade)"],
+                instructions: ["Amasse o tofu com um garfo até obter uma consistência similar a ovos mexidos.", "Aqueça o azeite em uma frigideira e refogue a cebola e o alho.", "Adicione a cúrcuma e o cominho, mexa por 30 segundos.", "Acrescente o tofu amassado e a levedura nutricional. Cozinhe por cerca de 5 minutos, mexendo.", "Junte o espinafre e cozinhe até murchar. Se desejar mais cremoso, adicione um fio de bebida vegetal.", "Tempere com sal e pimenta. Sirva quente."],
+                tags: ["vegano", "café da manhã", "refeicao", "sem-gluten", "sem-lactose"],
+                source: "Receitas veganas populares"
+            },
+            {
+                id: 7,
+                name: "Mingau de Aveia Cremoso com Leite e Sementes",
+                image: "https://images.unsplash.com/photo-1550927648-84241a7c7293?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8b2F0bWVhbCUyMGJvd2x8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60",
+                description: "Confortável e nutritivo, uma ótima maneira de incluir cálcio e fibras no seu café da manhã.",
+                ingredients: ["1/2 xícara de aveia em flocos", "1 xícara de leite (de vaca ou vegetal enriquecido com cálcio)", "1 col. sopa de sementes de chia ou linhaça moída", "Adoçante a gosto (mel, açúcar mascavo, xarope de bordo)", "Frutas picadas e nozes para cobrir (opcional)"],
+                instructions: ["Em uma panela pequena, misture a aveia, o leite e as sementes.", "Leve ao fogo médio, mexendo constantemente, até o mingau engrossar (cerca de 5-7 minutos).", "Retire do fogo, adoce a gosto.", "Sirva em uma tigela e cubra com suas frutas e nozes favoritas, se desejar."],
+                tags: ["café da manhã", "lanche", "rapido", "sem-gluten" /* usar aveia SG */],
+                source: "Clássico do café da manhã"
+            },
+            {
+                id: 8,
+                name: "Bruschetta de Tomate com Manjericão e Queijo Cottage",
+                image: "https://images.unsplash.com/photo-1580910360050-4c600078a9c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnJ1c2NoZXR0YSUyMHRvbWF0b3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                description: "Aperitivo ou lanche leve e saboroso, com cálcio do queijo cottage.",
+                ingredients: ["4 fatias de pão italiano ou baguete", "2 tomates maduros, sem sementes, picados", "1/2 xícara de queijo cottage", "Folhas de manjericão fresco picadas", "1 dente de alho pequeno", "Azeite de oliva extra virgem", "Sal e pimenta do reino a gosto"],
+                instructions: ["Torre levemente as fatias de pão no forno ou frigideira.", "Esfregue o dente de alho (cortado ao meio) sobre as torradas.", "Em uma tigela, misture os tomates picados, o queijo cottage e o manjericão.", "Tempere com um fio de azeite, sal e pimenta.", "Distribua a mistura de tomate e cottage sobre as torradas.", "Sirva imediatamente."],
+                tags: ["lanche", "aperitivo", "rapido"],
+                source: "Clássico italiano adaptado"
+            },
+            {
+                id: 9,
+                name: "Salada de Grão de Bico com Tahine e Espinafre",
+                image: "https://images.unsplash.com/photo-1620050079979-61b6f9f09190?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hpY2twZWElMjBzYWxhZCUyMHRhaGluaXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                description: "Salada robusta, vegana, rica em proteínas e cálcio (do grão de bico, tahine e espinafre).",
+                ingredients: ["1 lata (ou 1 e 1/2 xícara) de grão de bico cozido e escorrido", "2 xícaras de espinafre fresco baby", "1/4 xícara de cebola roxa fatiada fino", "1/4 xícara de salsinha picada", "Molho: 2 col. sopa de tahine, suco de 1 limão, 1 dente de alho pequeno amassado, 2-3 col. sopa de água fria (para consistência), sal e pimenta a gosto"],
+                instructions: ["Em uma saladeira grande, combine o grão de bico, espinafre, cebola roxa e salsinha.", "Em uma tigela pequena, misture todos os ingredientes do molho (tahine, limão, alho, água, sal, pimenta) até ficar homogêneo e cremoso. Adicione mais água se necessário para diluir.", "Regue a salada com o molho de tahine e misture bem.", "Sirva fria ou em temperatura ambiente."],
+                tags: ["vegano", "refeicao", "salada", "sem-gluten", "sem-lactose"],
+                source: "Inspirado em saladas mediterrâneas"
+            },
+            {
+                id: 10,
+                name: "Sopa Creme de Brócolis com Queijo",
+                image: "https://images.unsplash.com/photo-1617053304499-737da4790049?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnJvY2NvbGklMjBzb3VwfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60",
+                description: "Sopa cremosa e reconfortante, com cálcio do brócolis e do queijo.",
+                ingredients: ["1 maço de brócolis grande, cortado em floretes", "1 cebola média picada", "2 dentes de alho picados", "2 col. sopa de manteiga ou azeite", "4 xícaras de caldo de legumes", "1/2 xícara de creme de leite fresco (ou alternativa vegetal)", "100g de queijo cheddar ralado (ou outro de sua preferência)", "Sal e pimenta do reino a gosto", "Noz-moscada ralada na hora (opcional)"],
+                instructions: ["Em uma panela grande, derreta a manteiga ou aqueça o azeite. Refogue a cebola e o alho até ficarem macios.", "Adicione os floretes de brócolis e o caldo de legumes. Tempere com sal e pimenta.", "Cozinhe até o brócolis ficar bem macio (cerca de 15-20 minutos).", "Com um mixer de imersão, bata a sopa até ficar cremosa. Se não tiver, transfira com cuidado para um liquidificador e bata (cuidado com sopa quente).", "Volte a sopa para a panela (se usou liquidificador). Adicione o creme de leite e o queijo ralado. Mexa em fogo baixo até o queijo derreter e a sopa aquecer, sem ferver.", "Ajuste o tempero, se necessário. Sirva quente, polvilhada com noz-moscada (opcional)."],
+                tags: ["refeicao", "sopa", "sem-gluten" /* verificar caldo */],
+                source: "Clássico comfort food"
+            },
+            {
+                id: 11,
+                name: "Bolinhas de Ricota com Ervas e Gergelim",
+                image: "https://images.pexels.com/photos/8063002/pexels-photo-8063002.jpeg?auto=compress&cs=tinysrgb&w=600", // Imagem representativa de queijo com ervas
+                description: "Aperitivo leve ou lanche proteico, rico em cálcio da ricota e do gergelim.",
+                ingredients: ["250g de ricota fresca amassada", "2 col. sopa de salsinha picada", "1 col. sopa de cebolinha picada", "Raspas da casca de 1/2 limão siciliano", "Sal e pimenta do reino a gosto", "1/4 xícara de sementes de gergelim torradas para empanar"],
+                instructions: ["Em uma tigela, misture bem a ricota amassada, salsinha, cebolinha, raspas de limão, sal e pimenta.", "Com as mãos levemente umedecidas, forme pequenas bolinhas com a mistura de ricota.", "Passe cada bolinha nas sementes de gergelim torradas, cobrindo todos os lados.", "Leve à geladeira por pelo menos 30 minutos para firmar antes de servir.", "Sirva frias."],
+                tags: ["lanche", "aperitivo", "rapido", "sem-gluten"],
+                source: "Ideia de aperitivo saudável"
+            },
+            {
+                id: 12,
+                name: "Suco de Laranja com Couve e Gengibre",
+                image: "https://images.pexels.com/photos/13034239/pexels-photo-13034239.jpeg?auto=compress&cs=tinysrgb&w=600", // Imagem representativa de suco verde
+                description: "Refrescante e cheio de vitaminas, com um bom aporte de cálcio da couve.",
+                ingredients: ["2 laranjas grandes, descascadas e sem sementes", "1-2 folhas de couve manteiga (sem o talo grosso)", "1 pedaço pequeno de gengibre fresco (aprox. 1-2 cm), descascado", "1/2 copo de água gelada (opcional, para diluir)"],
+                instructions: ["Lave bem as folhas de couve.", "Pique as laranjas e a couve em pedaços menores para facilitar o processamento.", "Coloque todos os ingredientes no liquidificador.", "Bata bem até que a mistura esteja homogênea e a couve totalmente triturada.", "Se preferir um suco mais liso, coe antes de servir.", "Sirva imediatamente."],
+                tags: ["vegano", "bebida", "café da manhã", "lanche", "rapido", "sem-gluten", "sem-lactose"],
+                source: "Combinação popular de sucos detox"
+            }
+        ];
+
+        const recipeGallery = document.getElementById('recipeGallery');
+        const recipeModal = document.getElementById('recipeModal');
+        const closeRecipeModalBtn = document.getElementById('closeRecipeModalBtn');
+        const modalRecipeImage = document.getElementById('modalRecipeImage');
+        const modalRecipeName = document.getElementById('modalRecipeName');
+        const modalRecipeIngredients = document.getElementById('modalRecipeIngredients');
+        const modalRecipeInstructions = document.getElementById('modalRecipeInstructions');
+        const modalRecipeSource = document.getElementById('modalRecipeSource');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+
+        function displayRecipes(filteredRecipes) {
+            recipeGallery.innerHTML = '';
+            const recipesToDisplay = filteredRecipes || recipesData;
+
+            if (recipesToDisplay.length === 0) {
+                recipeGallery.innerHTML = '<p style="text-align:center; grid-column: 1 / -1; color: #777;">Nenhuma receita encontrada para este filtro.</p>';
+                return;
+            }
+
+            recipesToDisplay.forEach(recipe => {
+                const card = document.createElement('div');
+                card.classList.add('recipe-card');
+                card.dataset.id = recipe.id;
+
+                let tagsHTML = '';
+                if (recipe.tags && recipe.tags.length > 0) {
+                    tagsHTML = recipe.tags.map(tag => `<span class="tag">${tag.charAt(0).toUpperCase() + tag.slice(1)}</span>`).join('');
+                }
+
+                card.innerHTML = `
+                    <img src="${recipe.image}" alt="${recipe.name}" class="recipe-image-thumbnail">
+                    <div class="recipe-card-content">
+                        <h3>${recipe.name}</h3>
+                        <p class="recipe-description">${recipe.description}</p>
+                        <div class="recipe-tags">${tagsHTML}</div>
+                        <button class="btn-view-recipe" data-recipe-id="${recipe.id}"><i class="fas fa-eye"></i> Ver Receita</button>
+                    </div>
+                `;
+                recipeGallery.appendChild(card);
+            });
+
+            document.querySelectorAll('.btn-view-recipe').forEach(button => {
+                button.addEventListener('click', function () {
+                    const recipeId = parseInt(this.dataset.recipeId);
+                    openRecipeModal(recipeId);
+                });
+            });
+        }
+
+        function openRecipeModal(recipeId) {
+            const recipe = recipesData.find(r => r.id === recipeId);
+            if (recipe) {
+                modalRecipeImage.src = recipe.image;
+                modalRecipeImage.alt = recipe.name;
+                modalRecipeName.textContent = recipe.name;
+                modalRecipeSource.textContent = recipe.source || "Não especificada";
+
+                modalRecipeIngredients.innerHTML = '';
+                recipe.ingredients.forEach(ing => {
+                    const li = document.createElement('li');
+                    li.textContent = ing;
+                    modalRecipeIngredients.appendChild(li);
+                });
+
+                modalRecipeInstructions.innerHTML = '';
+                recipe.instructions.forEach(step => {
+                    const li = document.createElement('li');
+                    li.textContent = step;
+                    modalRecipeInstructions.appendChild(li);
+                });
+
+                recipeModal.style.display = "block";
+                document.body.style.overflow = 'hidden'; // Impede scroll do body quando modal está aberto
+            }
+        }
+
+        closeRecipeModalBtn.addEventListener('click', function () {
+            recipeModal.style.display = "none";
+            document.body.style.overflow = 'auto'; // Restaura scroll do body
+        });
+
+        window.addEventListener('click', function (event) {
+            if (event.target == recipeModal) {
+                recipeModal.style.display = "none";
+                document.body.style.overflow = 'auto'; // Restaura scroll do body
+            }
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                const filter = this.dataset.filter;
+                if (filter === "all") {
+                    displayRecipes(recipesData);
+                } else {
+                    const filtered = recipesData.filter(recipe => recipe.tags.includes(filter));
+                    displayRecipes(filtered);
+                }
+            });
+        });
+
+        document.getElementById('nav-receitas').classList.add('active');
+        const navCalc = document.getElementById('nav-calculadora');
+        if (navCalc) navCalc.classList.remove('active');
+        const navDicas = document.getElementById('nav-dicas');
+        if (navDicas) navDicas.classList.remove('active');
+
+
+        displayRecipes(recipesData);
+    </script>
+</body>
+
+</html>

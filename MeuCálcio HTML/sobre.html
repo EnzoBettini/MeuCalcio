@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuCálcio - Sobre o Projeto</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #5E7B91;
+            --secondary-color-bg: #F0F4F8;
+            --accent-color-positive: #4CAF50;
+            --accent-color-warning: #FF9800;
+            --accent-color-negative: #F44336;
+            --highlight-color: #FF7F50;
+            --text-color-dark: #333A40;
+            --text-color-light: #FFFFFF;
+            --border-color: #DDE2E6;
+            --navbar-bg: #37474F;
+            --navbar-link-color: #ECEFF1;
+            --navbar-link-hover-bg: #546E7A;
+            --navbar-link-active-bg: var(--primary-color);
+            --card-bg: #FFFFFF;
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --font-primary: 'Lato', sans-serif;
+            --font-secondary: 'Montserrat', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 0;
+            padding-top: 70px;
+            background-color: #F4F7F6;
+            color: var(--text-color-dark);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* --- Navbar Styles --- */
+        .navbar {
+            background-color: var(--navbar-bg);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1001;
+            height: 70px;
+        }
+
+        .navbar-container {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .navbar-brand {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            font-size: 1.9rem;
+            color: var(--text-color-light);
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            margin-right: 10px;
+            color: var(--highlight-color);
+        }
+
+        .navbar-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100%;
+        }
+
+        .nav-item {
+            margin-left: 8px;
+        }
+
+        .nav-item:first-child {
+            margin-left: 0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0 20px;
+            color: var(--navbar-link-color);
+            text-decoration: none;
+            font-family: var(--font-secondary);
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: background-color 0.25s ease, color 0.25s ease, border-bottom-color 0.25s ease;
+            position: relative;
+            border-bottom: 4px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .nav-link:hover {
+            background-color: var(--navbar-link-hover-bg);
+            color: var(--text-color-light);
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-link.active {
+            background-color: var(--navbar-link-active-bg);
+            color: var(--text-color-light);
+            font-weight: 700;
+            border-bottom-color: var(--highlight-color);
+        }
+
+        /* --- Conteúdo Principal da Página Sobre --- */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 30px 35px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-secondary);
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+        }
+
+        .page-header h1 i {
+            color: var(--highlight-color);
+            margin-right: 10px;
+        }
+
+        .page-header p.subtitle {
+            font-size: 1.2rem;
+            color: #546E7A;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            background-color: var(--card-bg);
+            padding: 30px 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .content-section h2 {
+            /* Título principal da seção */
+            font-family: var(--font-secondary);
+            font-size: 1.9rem;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--highlight-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .content-section h3 {
+            /* Subtítulo para cada universidade */
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            color: var(--text-color-dark);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .content-section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .content-section strong {
+            font-weight: 700;
+            color: var(--text-color-dark);
+        }
+
+        .content-section ul.creators-list {
+            /* Lista de criadores */
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-section ul.creators-list li {
+            font-size: 1.05rem;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .content-section ul.creators-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-section ul.creators-list li i {
+            color: var(--highlight-color);
+            margin-right: 12px;
+            font-size: 1.3em;
+            /* Ícones um pouco maiores */
+            width: 30px;
+            text-align: center;
+        }
+
+        .university-section {
+            /* Para cada bloco de universidade */
+            margin-bottom: 30px;
+        }
+
+        .university-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Ajustado para logos e fotos menores */
+            gap: 20px;
+            margin-top: 20px;
+            align-items: center;
+            /* Alinha verticalmente as imagens */
+        }
+
+        .image-gallery img {
+            width: 100%;
+            max-width: 250px;
+            /* Limita largura máxima da imagem, especialmente logos */
+            height: auto;
+            max-height: 180px;
+            /* Limita altura */
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background-color: #f9f9f9;
+            padding: 10px;
+            box-sizing: border-box;
+            margin: 0 auto;
+            /* Centraliza a imagem se ela for menor que a célula do grid */
+        }
+
+        .image-gallery .campus-image img {
+            /* Fotos de campus podem usar cover */
+            object-fit: cover;
+            max-height: 200px;
+            /* Altura diferente para fotos de campus */
+            width: 100%;
+            /* Ocupa toda a célula do grid */
+            max-width: 100%;
+            /* Sobrescreve max-width para campus */
+        }
+
+
+        .page-footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .navbar-container {
+                padding: 0 15px;
+            }
+
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar {
+                height: 60px;
+            }
+
+            .navbar-container {
+                padding: 0 10px;
+            }
+
+            .navbar-brand {
+                font-size: 1.6rem;
+            }
+
+            .nav-link {
+                padding: 0 12px;
+                font-size: 0.95rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-header p.subtitle {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .content-section h2 {
+                font-size: 1.7rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+                padding-top: 55px;
+            }
+
+            .navbar {
+                height: 55px;
+            }
+
+            .navbar-brand {
+                font-size: 1.4rem;
+            }
+
+            .nav-link {
+                padding: 0 8px;
+                font-size: 0.85rem;
+            }
+
+            .nav-item {
+                margin-left: 3px;
+            }
+
+            .page-header h1 {
+                font-size: 1.9rem;
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-section h3 {
+                font-size: 1.3rem;
+            }
+
+            .content-section p,
+            .content-section ul.creators-list li {
+                font-size: 1rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-bone"></i> MeuCálcio</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="index.html" id="nav-calculadora" class="nav-link">Calculadora</a></li>
+                <li class="nav-item"><a href="receitas.html" id="nav-receitas" class="nav-link">Receitas</a></li>
+                <li class="nav-item"><a href="sobre.html" id="nav-sobre" class="nav-link active">Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-info-circle"></i> Sobre o Projeto MeuCálcio</h1>
+            <p class="subtitle">Conheça mais sobre a origem, os criadores e as instituições por trás desta ferramenta.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h2>Origem do Projeto</h2>
+            <p>O <strong>MeuCálcio</strong> é uma ferramenta desenvolvida como parte de um projeto acadêmico, idealizado
+                para facilitar o monitoramento da ingestão diária de cálcio. Nosso objetivo é oferecer um recurso
+                simples, rápido e acessível, promovendo maior conscientização sobre a importância deste mineral para a
+                saúde.</p>
+            <p>Acreditamos que, com informação clara e ferramentas práticas, todos podem tomar decisões mais conscientes
+                sobre sua nutrição e bem-estar.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Criadores</h2>
+            <p>Este projeto foi desenvolvido com dedicação por:</p>
+            <ul class="creators-list">
+                <li><i class="fas fa-user-md"></i><strong>Pedro Bettini</strong> - Estudante de Medicina,
+                    <strong>UEPG</strong> (Universidade Estadual de Ponta Grossa)</li>
+                <li><i class="fas fa-laptop-code"></i><strong>Enzo Ayres Bettini</strong> - Estudante de Engenharia de
+                    Software, <strong>Unicesumar</strong></li>
+            </ul>
+            <p>Unimos conhecimentos das áreas de saúde e tecnologia para criar uma solução que esperamos ser útil e
+                educativa.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>As Universidades</h2>
+
+            <div class="university-section">
+                <h3><i class="fas fa-university"></i> Universidade Estadual de Ponta Grossa (UEPG)</h3>
+                <p>A UEPG é uma instituição de ensino superior pública, reconhecida por sua excelência em ensino,
+                    pesquisa e extensão. Localizada em Ponta Grossa, Paraná, desempenha um papel fundamental no
+                    desenvolvimento científico, cultural e social da região dos Campos Gerais e de todo o estado.</p>
+                <div class="image-gallery uepg-gallery">
+                    <div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Logo_State_University_of_Ponta_Grossa.png"
+                            alt="Logo UEPG" title="Logo UEPG (Fonte: uepg.br)">
+                    </div>
+                    <div class="campus-image">
+                        <img src="https://www.uepg.br/wp-content/uploads/2024/12/fachada-reitoria-e-portal-campus-jun-2023-AJ-1232x821.jpg"
+                            alt="Campus Uvaranas UEPG"
+                            title="Campus Uvaranas UEPG (Fonte: Wikimedia Commons, Autor: Arquivo Secs/UEPG)">
+                    </div>
+                </div>
+            </div>
+
+            <div class="university-section">
+                <h3><i class="fas fa-school"></i> Unicesumar</h3>
+                <p>A Unicesumar é uma instituição de ensino superior privada com mais de 30 anos de história,
+                    destacando-se pela qualidade de ensino e inovação. Com sede em Maringá, Paraná, e polos de educação
+                    a distância em todo o Brasil e no exterior, a Unicesumar oferece uma ampla gama de cursos de
+                    graduação e pós-graduação, comprometida com a formação integral de seus alunos.</p>
+                <div class="image-gallery unicesumar-gallery">
+                    <div>
+                        <img src="https://www.unicesumar.edu.br/wp-content/themes/unicesumar/templates/assets_home/img/logo.webp"
+                            alt="Logo Unicesumar" title="Logo Unicesumar (Fonte: unicesumar.edu.br)">
+                    </div>
+                    <div class="campus-image">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npiBJOf1IAkmIwxwMNwRslFVFlq-TWwaJlehAX5NrWpKN9MNIUlTQE-7fddyER-aKAjqFwFzuRUI74C4Y6hLKJeoY24Zg3mzbZbyd6WV3Ngl0it0NfsgHbJ0CyCWdB4alfU3x5T=s680-w680-h510-rw"
+                            alt="Campus Unicesumar Maringá"
+                            title="Campus Unicesumar Maringá (Fonte: blog.unicesumar.edu.br)">
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 0.8em; text-align: center; color: #777; margin-top: 25px;"><em>Imagens das
+                    universidades utilizadas para fins ilustrativos. Verifique as fontes para informações de
+                    licenciamento.</em></p>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2025 MeuCálcio. Projeto Acadêmico.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navCalculadora = document.getElementById('nav-calculadora');
+            const navReceitas = document.getElementById('nav-receitas');
+            const navSobre = document.getElementById('nav-sobre');
+
+            if (navSobre) {
+                navSobre.classList.add('active');
+            }
+            if (navCalculadora) {
+                navCalculadora.classList.remove('active');
+            }
+            if (navReceitas) {
+                navReceitas.classList.remove('active');
+                // Alerta para link de Receitas se ainda for placeholder (não é o caso se já temos receitas.html)
+                navReceitas.addEventListener('click', function (e) {
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                        alert("A seção de Receitas está em desenvolvimento!");
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
