@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+        crossorigin="anonymous"></script>
+
     <style>
         :root {
             --primary-color: #5E7B91;
@@ -30,6 +34,10 @@
             --navbar-link-active-bg: var(--primary-color);
             --font-primary: 'Lato', sans-serif;
             --font-secondary: 'Montserrat', sans-serif;
+
+            /* PASSO 2: Definir a largura das barras de anúncio */
+            --ad-sidebar-width: 180px;
+            /* Largura para anúncios como 160x600 */
         }
 
         body {
@@ -42,6 +50,60 @@
             line-height: 1.7;
             font-size: 17px;
         }
+
+        /* PASSO 3: ESTILOS PARA O LAYOUT COM ANÚNCIOS */
+        .page-wrapper {
+            display: grid;
+            /* Define 3 colunas: anúncio esquerdo, conteúdo, anúncio direito */
+            grid-template-columns: var(--ad-sidebar-width) 1fr var(--ad-sidebar-width);
+            gap: 20px;
+            /* Espaço entre as colunas */
+            max-width: 1400px;
+            /* Largura máxima da página inteira */
+            margin: 0 auto;
+            align-items: start;
+            /* Alinha os itens no topo */
+        }
+
+        .ad-sidebar-left,
+        .ad-sidebar-right {
+            position: sticky;
+            /* Faz os anúncios acompanharem a rolagem */
+            top: 90px;
+            /* Distância do topo (70px da navbar + 20px de margem) */
+            width: var(--ad-sidebar-width);
+            height: 600px;
+            /* Altura padrão para um anúncio vertical */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            /* Cor de fundo para o espaço do anúncio */
+        }
+
+        .main-content {
+            grid-column: 2 / 3;
+            /* O conteúdo principal ocupa a segunda coluna */
+            width: 100%;
+        }
+
+        .footer-ad-container {
+            grid-column: 2 / 3;
+            /* Ocupa a coluna central */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 728px;
+            /* Largura comum para anúncios de rodapé */
+            height: 90px;
+            /* Altura comum para anúncios de rodapé */
+            background-color: #f0f0f0;
+            /* Cor de fundo */
+        }
+
+        /* Fim dos estilos para o layout com anúncios */
 
         .navbar {
             background-color: var(--navbar-bg);
@@ -126,7 +188,8 @@
 
         .container {
             max-width: 960px;
-            margin: 40px auto;
+            /* A margem 'auto' não é mais necessária aqui, pois o .page-wrapper já centraliza */
+            margin: 40px 0;
             padding: 30px 35px;
             background-color: var(--text-color-light);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -587,6 +650,36 @@
             cursor: pointer;
         }
 
+        /* PASSO 4: AJUSTES DE RESPONSIVIDADE */
+
+        /* Oculta as barras laterais em telas menores que 1320px */
+        @media (max-width: 1320px) {
+            .page-wrapper {
+                /* Muda para uma única coluna */
+                grid-template-columns: 1fr;
+                padding: 0 15px;
+                /* Adiciona um preenchimento lateral */
+            }
+
+            .ad-sidebar-left,
+            .ad-sidebar-right {
+                display: none;
+                /* Oculta os anúncios laterais */
+            }
+
+            .main-content,
+            .footer-ad-container {
+                /* Faz o conteúdo e o anúncio do rodapé ocuparem a largura total */
+                grid-column: 1 / -1;
+            }
+
+            .container {
+                margin-top: 30px;
+                padding: 20px;
+            }
+        }
+
+
         @media (max-width: 992px) {
             .navbar-container {
                 padding: 0 15px;
@@ -619,8 +712,9 @@
                 font-size: 0.95rem;
             }
 
+            /* Ajuste para o .container em telas menores, já que o padding do page-wrapper existe */
             .container {
-                margin: 30px 15px;
+                margin: 30px 0;
                 padding: 20px;
                 border-radius: 12px;
             }
@@ -687,6 +781,10 @@
                 padding-top: 55px;
             }
 
+            .page-wrapper {
+                padding: 0 10px;
+            }
+
             .navbar {
                 height: 55px;
             }
@@ -709,7 +807,7 @@
             }
 
             .container {
-                margin: 20px 10px;
+                margin: 20px 0;
                 padding: 15px;
                 border-radius: 10px;
             }
@@ -750,80 +848,118 @@
         </div>
     </nav>
 
-    <div class="container">
-        <header class="header">
-            <h1>Calculadora de Cálcio</h1>
-            <p>Monitore sua ingestão diária de cálcio de forma precisa.</p>
-        </header>
+    <div class="page-wrapper">
+        <aside class="ad-sidebar-left">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+                data-ad-slot="YYYYYYYYYY" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </aside>
 
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-user-edit"></i>1. Seu Perfil</h2>
-            <div class="profile-grid">
-                <div class="form-group">
-                    <label for="age">Idade (anos):</label>
-                    <input type="number" id="age" name="age" min="1" value="35">
-                </div>
-                <div class="form-group">
-                    <label for="sex">Sexo:</label>
-                    <select id="sex" name="sex">
-                        <option value="male">Masculino</option>
-                        <option value="female" selected>Feminino</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="weight">Peso (kg):</label>
-                    <input type="number" id="weight" name="weight" min="1" step="0.1" value="70">
-                </div>
-                <div class="form-group">
-                    <label for="height">Altura (cm):</label>
-                    <input type="number" id="height" name="height" min="1" value="165">
-                </div>
-            </div>
-            <div id="recommendation-display">
-                Sua meta diária de Cálcio: <span id="calcium-goal">1000 mg</span>
-            </div>
-        </section>
+        <main class="main-content">
+            <div class="container">
+                <header class="header">
+                    <h1>Calculadora de Cálcio</h1>
+                    <p>Monitore sua ingestão diária de cálcio de forma precisa.</p>
+                </header>
 
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-utensils"></i>2. Alimentos Consumidos Hoje</h2>
-            <div class="form-group">
-                <div id="food-entry-fields">
-                    <div>
-                        <label for="food-item">Alimento:</label>
-                        <input type="text" id="food-item" placeholder="Digite o alimento..." autocomplete="off">
-                        <div id="autocomplete-list" class="autocomplete-suggestions"></div>
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-user-edit"></i>1. Seu Perfil</h2>
+                    <div class="profile-grid">
+                        <div class="form-group">
+                            <label for="age">Idade (anos):</label>
+                            <input type="number" id="age" name="age" min="1" value="35">
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">Sexo:</label>
+                            <select id="sex" name="sex">
+                                <option value="male">Masculino</option>
+                                <option value="female" selected>Feminino</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="weight">Peso (kg):</label>
+                            <input type="number" id="weight" name="weight" min="1" step="0.1" value="70">
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Altura (cm):</label>
+                            <input type="number" id="height" name="height" min="1" value="165">
+                        </div>
                     </div>
-                    <div>
-                        <label for="food-quantity">Quantidade:</label>
-                        <input type="number" id="food-quantity" min="0.1" step="0.1" value="100">
+                    <div id="recommendation-display">
+                        Sua meta diária de Cálcio: <span id="calcium-goal">1000 mg</span>
                     </div>
-                    <div>
-                        <label for="food-unit">Unidade:</label>
-                        <select id="food-unit">
-                            <option value="g">g (gramas)</option>
-                            <option value="ml">ml (mililitros)</option>
-                        </select>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-utensils"></i>2. Alimentos Consumidos Hoje</h2>
+                    <div class="form-group">
+                        <div id="food-entry-fields">
+                            <div>
+                                <label for="food-item">Alimento:</label>
+                                <input type="text" id="food-item" placeholder="Digite o alimento..." autocomplete="off">
+                                <div id="autocomplete-list" class="autocomplete-suggestions"></div>
+                            </div>
+                            <div>
+                                <label for="food-quantity">Quantidade:</label>
+                                <input type="number" id="food-quantity" min="0.1" step="0.1" value="100">
+                            </div>
+                            <div>
+                                <label for="food-unit">Unidade:</label>
+                                <select id="food-unit">
+                                    <option value="g">g (gramas)</option>
+                                    <option value="ml">ml (mililitros)</option>
+                                </select>
+                            </div>
+                            <button id="add-food-btn" class="btn btn-add"><i class="fas fa-plus-circle"></i>
+                                Adicionar</button>
+                        </div>
                     </div>
-                    <button id="add-food-btn" class="btn btn-add"><i class="fas fa-plus-circle"></i> Adicionar</button>
+                    <ul id="consumed-foods-list" class="food-list"></ul>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title"><i class="fas fa-chart-line"></i>3. Seu Resultado Diário</h2>
+                    <div id="progress-bar-container">
+                        <div id="progress-bar">0%</div>
+                    </div>
+                    <div class="results-summary">
+                        <p id="calcium-total-display">Total Consumido: 0 mg</p>
+                        <p id="calcium-status-message" class="danger">Abaixo do Recomendado</p>
+                    </div>
+                </section>
+
+                <div class="footer-notes">
+                    <a href="#" id="show-sources-btn">Fontes e Metodologia</a>
                 </div>
             </div>
-            <ul id="consumed-foods-list" class="food-list"></ul>
-        </section>
 
-        <section class="section">
-            <h2 class="section-title"><i class="fas fa-chart-line"></i>3. Seu Resultado Diário</h2>
-            <div id="progress-bar-container">
-                <div id="progress-bar">0%</div>
+            <div class="footer-ad-container">
+                <script async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+                    crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+                    data-ad-slot="ZZZZZZZZZZ" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
-            <div class="results-summary">
-                <p id="calcium-total-display">Total Consumido: 0 mg</p>
-                <p id="calcium-status-message" class="danger">Abaixo do Recomendado</p>
-            </div>
-        </section>
+        </main>
 
-        <div class="footer-notes">
-            <a href="#" id="show-sources-btn">Fontes e Metodologia</a>
-        </div>
+        <aside class="ad-sidebar-right">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+                data-ad-slot="WWWWWWWWWW" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </aside>
     </div>
 
     <div id="sourcesModal" class="modal">
@@ -892,19 +1028,19 @@
         let debounceTimer;
 
         // --- Functions ---
-    async function searchFoodAPI(searchTerm) {
-        if (searchTerm.length < 3) {
+        async function searchFoodAPI(searchTerm) {
+            if (searchTerm.length < 3) {
+                autocompleteList.innerHTML = '';
+                autocompleteList.style.display = 'none';
+                return;
+            }
+
             autocompleteList.innerHTML = '';
-            autocompleteList.style.display = 'none';
-            return;
-        }
+            autocompleteList.classList.add('loading');
+            autocompleteList.style.display = 'block';
+            addFoodBtn.disabled = true;
 
-        autocompleteList.innerHTML = '';
-        autocompleteList.classList.add('loading');
-        autocompleteList.style.display = 'block';
-        addFoodBtn.disabled = true;
-
-        const query = `
+            const query = `
         query {
             getAllFood {
                 name
@@ -915,94 +1051,94 @@
         }
     `;
 
-        try {
-            const response = await fetch("http://localhost:4000/graphql", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query })
+            try {
+                const response = await fetch("http://localhost:4000/graphql", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query })
+                });
+
+                const json = await response.json(); // ← AQUI: garantir que json seja declarado
+
+                autocompleteList.classList.remove('loading');
+                addFoodBtn.disabled = false;
+
+                const allFoods = json.data?.getAllFood || [];
+
+                const filteredFoods = allFoods.filter(food =>
+                    food.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                if (filteredFoods.length > 0) {
+                    filteredFoods.slice(0, 10).forEach(food => {
+                        const div = document.createElement('div');
+                        div.textContent = food.name;
+                        div.addEventListener('click', () => {
+                            foodItemInput.value = food.name;
+                            selectedFoodFromAPI = food;
+                            autocompleteList.innerHTML = '';
+                            autocompleteList.style.display = 'none';
+                            foodQuantityInput.value = 100;
+                            foodQuantityInput.focus();
+                        });
+                        autocompleteList.appendChild(div);
+                    });
+                } else {
+                    autocompleteList.innerHTML = '<div class="no-results">Nenhum alimento encontrado.';
+                }
+            } catch (error) {
+                console.error("Erro ao buscar dados:", error);
+                autocompleteList.classList.remove('loading');
+                addFoodBtn.disabled = false;
+                autocompleteList.innerHTML = `<div class="no-results">Erro ao buscar: ${error.message}</div>`;
+            }
+        }
+
+
+
+
+        function addFoodItem() {
+            const foodName = foodItemInput.value.trim();
+            const quantity = parseFloat(foodQuantityInput.value);
+            const unit = foodUnitSelect.value;
+
+            if (!selectedFoodFromAPI || selectedFoodFromAPI.name !== foodName) {
+                alert("Por favor, selecione um alimento da lista de sugestões.");
+                return;
+            }
+
+            if (isNaN(quantity) || quantity <= 0) {
+                alert("Por favor, insira uma quantidade válida.");
+                return;
+            }
+
+            const foodData = selectedFoodFromAPI;
+            const calciumValuePer100g = foodData.nutrients.calcium;
+
+            if (calciumValuePer100g === undefined || isNaN(calciumValuePer100g)) {
+                alert(`O alimento "${foodName}" não possui dados de cálcio.`);
+                return;
+            }
+
+            const calciumAmountMg = (calciumValuePer100g / 100) * quantity;
+
+            const foodId = Date.now();
+            consumedFoods.push({
+                id: foodId,
+                name: foodName,
+                quantityDisplay: `${quantity} ${unit}`,
+                calcium: Math.round(calciumAmountMg)
             });
 
-            const json = await response.json(); // ← AQUI: garantir que json seja declarado
-
-            autocompleteList.classList.remove('loading');
-            addFoodBtn.disabled = false;
-
-            const allFoods = json.data?.getAllFood || [];
-
-            const filteredFoods = allFoods.filter(food =>
-                food.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-
-            if (filteredFoods.length > 0) {
-                filteredFoods.slice(0, 10).forEach(food => {
-                    const div = document.createElement('div');
-                    div.textContent = food.name;
-                    div.addEventListener('click', () => {
-                        foodItemInput.value = food.name;
-                        selectedFoodFromAPI = food;
-                        autocompleteList.innerHTML = '';
-                        autocompleteList.style.display = 'none';
-                        foodQuantityInput.value = 100;
-                        foodQuantityInput.focus();
-                    });
-                    autocompleteList.appendChild(div);
-                });
-            } else {
-                autocompleteList.innerHTML = '<div class="no-results">Nenhum alimento encontrado.';
-            }
-        } catch (error) {
-            console.error("Erro ao buscar dados:", error);
-            autocompleteList.classList.remove('loading');
-            addFoodBtn.disabled = false;
-            autocompleteList.innerHTML = `<div class="no-results">Erro ao buscar: ${error.message}</div>`;
+            // Limpa campos
+            foodItemInput.value = '';
+            foodQuantityInput.value = 100;
+            selectedFoodFromAPI = null;
+            autocompleteList.style.display = 'none';
+            renderConsumedFoods();
+            updateResults();
+            foodItemInput.focus();
         }
-    }
-
-
-
-
-    function addFoodItem() {
-        const foodName = foodItemInput.value.trim();
-        const quantity = parseFloat(foodQuantityInput.value);
-        const unit = foodUnitSelect.value;
-
-        if (!selectedFoodFromAPI || selectedFoodFromAPI.name !== foodName) {
-            alert("Por favor, selecione um alimento da lista de sugestões.");
-            return;
-        }
-
-        if (isNaN(quantity) || quantity <= 0) {
-            alert("Por favor, insira uma quantidade válida.");
-            return;
-        }
-
-        const foodData = selectedFoodFromAPI;
-        const calciumValuePer100g = foodData.nutrients.calcium;
-
-        if (calciumValuePer100g === undefined || isNaN(calciumValuePer100g)) {
-            alert(`O alimento "${foodName}" não possui dados de cálcio.`);
-            return;
-        }
-
-        const calciumAmountMg = (calciumValuePer100g / 100) * quantity;
-
-        const foodId = Date.now();
-        consumedFoods.push({
-            id: foodId,
-            name: foodName,
-            quantityDisplay: `${quantity} ${unit}`,
-            calcium: Math.round(calciumAmountMg)
-        });
-
-        // Limpa campos
-        foodItemInput.value = '';
-        foodQuantityInput.value = 100;
-        selectedFoodFromAPI = null;
-        autocompleteList.style.display = 'none';
-        renderConsumedFoods();
-        updateResults();
-        foodItemInput.focus();
-    }
 
         function removeFoodItem(foodId) {
             consumedFoods = consumedFoods.filter(food => food.id !== foodId);
@@ -1114,20 +1250,20 @@
         });
 
         function calculateCalciumGoal() {
-                const age = parseInt(ageInput.value);
-                const sex = sexInput.value;
+            const age = parseInt(ageInput.value);
+            const sex = sexInput.value;
 
-                if (age >= 1 && age <= 3) currentCalciumGoal = 700;
-                else if (age >= 4 && age <= 8) currentCalciumGoal = 1000;
-                else if (age >= 9 && age <= 18) currentCalciumGoal = 1300;
-                else if (age >= 19 && age <= 50) currentCalciumGoal = 1000;
-                else if (age >= 51 && age <= 70) currentCalciumGoal = (sex === "male") ? 1000 : 1200;
-                else if (age >= 71) currentCalciumGoal = 1200;
-                else currentCalciumGoal = 1000;
+            if (age >= 1 && age <= 3) currentCalciumGoal = 700;
+            else if (age >= 4 && age <= 8) currentCalciumGoal = 1000;
+            else if (age >= 9 && age <= 18) currentCalciumGoal = 1300;
+            else if (age >= 19 && age <= 50) currentCalciumGoal = 1000;
+            else if (age >= 51 && age <= 70) currentCalciumGoal = (sex === "male") ? 1000 : 1200;
+            else if (age >= 71) currentCalciumGoal = 1200;
+            else currentCalciumGoal = 1000;
 
-                calciumGoalDisplay.textContent = `${currentCalciumGoal} mg`;
-                updateResults();
-            }
+            calciumGoalDisplay.textContent = `${currentCalciumGoal} mg`;
+            updateResults();
+        }
         calculateCalciumGoal();
         updateResults();
     </script>
