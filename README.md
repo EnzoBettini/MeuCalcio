@@ -30,7 +30,8 @@ Technologies Used
 Frontend: HTML5, CSS3, JavaScript (ES6+)
 API: TACO API consumed via GraphQL
 Libraries/Fonts: Font Awesome (for icons), Google Fonts
-Descrição do Projeto (Português)
+<hr>
+# Descrição do Projeto (Português)
 O MeuCálcio é uma aplicação web acadêmica projetada para ajudar usuários a monitorar sua ingestão diária de cálcio de forma fácil e precisa. Desenvolvido com foco no público brasileiro, a ferramenta integra dados da Tabela Brasileira de Composição de Alimentos (TACO) para fornecer informações nutricionais relevantes. O projeto combina uma calculadora funcional com recursos educacionais para promover uma maior consciência nutricional.
 
 Como Funciona
